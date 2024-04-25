@@ -8,20 +8,50 @@ import numpy as np
 
 data_dict = pickle.load(open('./data.pickle', 'rb'))
 
-data = np.asarray(data_dict['data'])
+data_list = np.asarray(data_dict['data'])
 
-# data = []
-# for  i in data_list:
-#     while(len(i)!=84):
-#         i.append(0) 
-#     data.append(i)
+data = []
+for  i in data_list:
+    while(len(i)!=84):
+        i.append(0) 
+    data.append(i)
 
-# print(data)
+# for i in data:
+#     print(i)
 # print("____________________________________________")
 
-labels = np.asarray(data_dict['labels'])
+labels = np.asarray(data_dict['labels'])[:len(data)]
+# print(data)
+# print(labels)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=5, shuffle=True, stratify=labels)
 x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, shuffle=True, stratify=labels)
+
+# print(data)
+# print(x_train.shape)
+# print("---------------------------------------")
+# print(labels)
+
+
+
+
+
+
+
+
 
 
 
@@ -37,4 +67,4 @@ print('{}% of samples were classified correctly !'.format(score * 100))
 
 f = open('model.p', 'wb')
 pickle.dump({'model': model}, f)
-f.close()
+# f.close()
